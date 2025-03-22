@@ -1,2 +1,2 @@
-# air_traffic_control-abs
-ECE 531 - Agent-based Simulation
+# Air Traffic Control Agent-based Simulation
+University of Arizona - ECE 531
