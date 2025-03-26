@@ -7,7 +7,7 @@ from agents.weather import Weather
 from agents.atc import AirTrafficControl
 from data_loader import get_flights, get_aircraft_track_path
 
-class AirportATC(Model):
+class Airport(Model):
     def __init__(self, airport_id: str, start: datetime, end: datetime):
         super().__init__()
         self.airport_id = airport_id
@@ -51,7 +51,9 @@ class AirportATC(Model):
             )
 
     def get_airport_location(self, airport_id):
-        # Dummy implementation – replace with actual coordinates lookup.
+        if airport_id.upper() == "LAX":
+            return (33.9416, -118.4085)
+        # Add further logic for other airports here.
         return (0.0, 0.0)
     
     def haversine(self, coord1, coord2):
@@ -77,5 +79,5 @@ if __name__ == "__main__":
     start = datetime(2025, 3, 1, 14, 0)
     end = datetime(2025, 3, 1, 14, 30)
 
-    airport_atc = AirportATC("LAX", start, end)
-    airport_atc.run_model()
+    airport = Airport("LAX", start, end)
+    airport.run_model()
