@@ -35,10 +35,10 @@ class Aircraft(Agent):
         self.status = "Scheduled"
         self.curr_waypoint_idx = 0
         self.position = None
+        self.altitude = None
     
     def step(self):
-        current_time = self.model.current_time
-        print(f"Aircraft {self.callsign} at {current_time} is at {self.position} with status {self.status}")
+        # print(f"Aircraft {self.callsign} at {current_time} is at {self.position} with status {self.status}")
         
         if not self.waypoints:
             self.status = "No track"
@@ -46,12 +46,12 @@ class Aircraft(Agent):
         
         while self.curr_waypoint_idx < len(self.waypoints):
             point = self.waypoints[self.curr_waypoint_idx]
-            if point.time > current_time:
+            if point.time > self.model.current_time:
                 break
             self.position = (point.latitude, point.longitude)
             self.altitude = point.altitude or 0
             self.curr_waypoint_idx += 1
-        
+            
         if self.curr_waypoint_idx >= len(self.waypoints):
             self.status = "Landed"
         else:
