@@ -38,7 +38,8 @@ class Aircraft(Agent):
         self.altitude = None
     
     def step(self):
-        # print(f"Aircraft {self.callsign} at {current_time} is at {self.position} with status {self.status}")
+        print(f"Aircraft {self.callsign}: {self.status} at {self.model.current_time}")
+        print(f"Position: {self.position}, Altitude: {self.altitude}")
         
         if not self.waypoints:
             self.status = "No track"
@@ -49,6 +50,7 @@ class Aircraft(Agent):
             if point.time > self.model.current_time:
                 break
             self.position = (point.latitude, point.longitude)
+            
             self.altitude = point.altitude or 0
             self.curr_waypoint_idx += 1
             
